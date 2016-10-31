@@ -15,18 +15,18 @@ exports.generatePutPolicy = function (options) {
   }
 }
 
-exports.generateDeadline =function (expiresIn) {
+exports.generateDeadline = function (expiresIn) {
   return Math.round((new Date().getTime() + expiresIn) / 1000)
 }
 
-function base64 (value) {
+exports.base64 = function (value) {
   return new Buffer(value).toString('base64')
 }
 
-function urlSafeBase64 (value) {
+exports.urlSafeBase64 = function (value) {
   return value.replace(/\//g, '_').replace(/\+/g, '-')
 }
 
-function hmacSha1 (key, value) {
+exports.hmacSha1 = function (key, value) {
   return crypto.createHmac('sha1', key).update(value).digest('base64')
 }
