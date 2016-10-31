@@ -10,7 +10,7 @@ exports.generateUptoken = function (accessKey, secretKey, putPolicyObject) {
 exports.generatePutPolicy = function (options) {
   return {
     scope: options.key ? options.bucket + ':' + options.key : options.bucket,
-    deadline: options.deadline || exports.generateDeadline(options.expiresIn || 1000 * 60 * 60 * 24), // 1 hour
+    deadline: options.deadline || exports.generateDeadline(options.expiresIn || 1000 * 60 * 60 * 24), // 1 day
     returnBody: options.returnBody || '{"name":$(fname),"size":$(fsize),"w":$(imageInfo.width),"h":$(imageInfo.height),"hash":$(etag)}'
   }
 }
@@ -19,14 +19,14 @@ exports.generateDeadline = function (expiresIn) {
   return Math.round((new Date().getTime() + expiresIn) / 1000)
 }
 
-exports.base64 = function (value) {
+function base64 (value) {
   return new Buffer(value).toString('base64')
 }
 
-exports.urlSafeBase64 = function (value) {
+function urlSafeBase64 (value) {
   return value.replace(/\//g, '_').replace(/\+/g, '-')
 }
 
-exports.hmacSha1 = function (key, value) {
+function hmacSha1 (key, value) {
   return crypto.createHmac('sha1', key).update(value).digest('base64')
 }
