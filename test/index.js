@@ -22,7 +22,6 @@ describe('generatorPutPolicy', function () {
   var returnBody = '{"name":$(fname),"size":$(fsize),"w":$(imageInfo.width),"h":$(imageInfo.height),"hash":$(etag)}'
 
   it('generatePutPolicy with bucket, key, dealine, returnBody', function () {
-
     var putPolicy = generator.generatePutPolicy({
       bucket: bucket,
       key: key,
